@@ -19,8 +19,8 @@ describe('Check In User Case', () => {
 			title: 'Javascript Gym',
 			description: '',
 			phone: '',
-			latitude: new Decimal(0),
-			longitude: new Decimal(0),
+			latitude: new Decimal(-15.4600052),
+			longitude: new Decimal(-47.6093762),
 		})
 
 		vi.useFakeTimers()
@@ -75,13 +75,31 @@ describe('Check In User Case', () => {
 
 		vi.setSystemTime(new Date(2023, 2, 21, 8, 0, 0))
 
-		const { checkIn } = await sut.execute({
+		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
 			userLatitude: -15.4600052,
 			userLongitude: -47.6093762,
 		})
+	})
 
-		console.log(checkIn)
+	it('should not be able to check in on distant gym', async () => {
+		expect(async () => {
+			inMemoryGymRepository.items.push({
+				id: 'gym-02',
+				title: 'Javascript Gym',
+				description: '',
+				phone: '',
+				latitude: new Decimal(-15.4461143),
+				longitude: new Decimal(-47.608408),
+			})
+
+			await sut.execute({
+				gymId: 'gym-02',
+				userId: 'user-01',
+				userLatitude: -15.4600052,
+				userLongitude: -47.6093762,
+			})
+		}).rejects.toBeInstanceOf(Error)
 	})
 })
