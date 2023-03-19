@@ -9,7 +9,7 @@
 - [x] Deve ser possível obter o perfil de um usuário logado.
 - [ ] Deve ser possível obter o numero de check-ins realizados pelo usuário logado.
 - [x] Deve ser possível se o usuário obter seu histórico de check-ins.
-- [ ] Deve ser possível se o usuário obter academias próximas (até 10km).
+- [x] Deve ser possível se o usuário obter academias próximas (até 10km).
 - [x] Deve ser possível se o usuário buscar academias pelo nome.
 - [x] Deve ser possível se o usuário realizar check-ins em uma academia.
 - [ ] Deve ser possível validar o check-ins de um usuário.
