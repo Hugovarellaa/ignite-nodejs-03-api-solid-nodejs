@@ -18,7 +18,7 @@
 ## RNs (Regras de negócio)
 
 - [x] O usuário não deve pode ser cadastrar com um e-mail duplicado
-- [ ] O usuário não pode fazer 2 check-ins no mesmo dia
+- [x] O usuário não pode fazer 2 check-ins no mesmo dia
 - [ ] O usuário não pode fazer check-ins se nao estiver perto (100m) da academia
 - [ ] O check-ins so pode ser validado até 20 minutos após criado
 - [ ] O check-ins so pode ser validado por administradores

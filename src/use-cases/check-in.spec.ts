@@ -1,14 +1,27 @@
 import { InMemoryCheckInRepository } from '@/repositories/in-memory/in-memory-check-in-repository'
+import { InMemoryGymRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { Decimal } from '@prisma/client/runtime/library'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { CheckInUseCase } from './check-in'
 
+let inMemoryGymRepository: InMemoryGymRepository
 let inMemoryCheckInRepository: InMemoryCheckInRepository
 let sut: CheckInUseCase
 
 describe('Check In User Case', () => {
 	beforeEach(() => {
+		inMemoryGymRepository = new InMemoryGymRepository()
 		inMemoryCheckInRepository = new InMemoryCheckInRepository()
-		sut = new CheckInUseCase(inMemoryCheckInRepository)
+		sut = new CheckInUseCase(inMemoryCheckInRepository, inMemoryGymRepository)
+
+		inMemoryGymRepository.items.push({
+			id: 'gym-01',
+			title: 'Javascript Gym',
+			description: '',
+			phone: '',
+			latitude: new Decimal(0),
+			longitude: new Decimal(0),
+		})
 
 		vi.useFakeTimers()
 	})
@@ -21,6 +34,8 @@ describe('Check In User Case', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: -15.4600052,
+			userLongitude: -47.6093762,
 		})
 
 		expect(checkIn).toHaveProperty('id')
@@ -36,11 +51,15 @@ describe('Check In User Case', () => {
 			await sut.execute({
 				gymId: 'gym-01',
 				userId: 'user-01',
+				userLatitude: -15.4600052,
+				userLongitude: -47.6093762,
 			})
 
 			await sut.execute({
 				gymId: 'gym-01',
 				userId: 'user-01',
+				userLatitude: -15.4600052,
+				userLongitude: -47.6093762,
 			})
 		}).rejects.toBeInstanceOf(Error)
 	})
@@ -50,6 +69,8 @@ describe('Check In User Case', () => {
 		await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: -15.4600052,
+			userLongitude: -47.6093762,
 		})
 
 		vi.setSystemTime(new Date(2023, 2, 21, 8, 0, 0))
@@ -57,6 +78,8 @@ describe('Check In User Case', () => {
 		const { checkIn } = await sut.execute({
 			gymId: 'gym-01',
 			userId: 'user-01',
+			userLatitude: -15.4600052,
+			userLongitude: -47.6093762,
 		})
 
 		console.log(checkIn)
