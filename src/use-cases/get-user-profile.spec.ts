@@ -1,6 +1,7 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
 import { hash } from 'bcryptjs'
 import { beforeEach, describe, expect, it } from 'vitest'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { GetUserProfileUseCase } from './get-user-profile'
 
 let inMemoryUsersRepository: InMemoryUsersRepository
@@ -28,5 +29,13 @@ describe('Get Profile UseCase', () => {
 		expect(user).toHaveProperty('email')
 		expect(user).toHaveProperty('password_hash')
 		expect(user).toHaveProperty('created_at')
+	})
+
+	it('should not be able to user profile with wrong id', async () => {
+		expect(async () => {
+			await sut.execute({
+				userId: 'non-existing-id',
+			})
+		}).rejects.toBeInstanceOf(ResourceNotFoundError)
 	})
 })
