@@ -11,7 +11,7 @@
 - [ ] Deve ser possível se o usuário obter seu histórico de check-ins
 - [ ] Deve ser possível se o usuário obter academias próximas
 - [ ] Deve ser possível se o usuário buscar academias pelo nome
-- [ ] Deve ser possível se o usuário realizar check-ins em uma academia
+- [x] Deve ser possível se o usuário realizar check-ins em uma academia
 - [ ] Deve ser possível validar o check-ins de um usuário
 - [ ] Deve ser possível cadastrar uma academia
 
