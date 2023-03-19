@@ -8,7 +8,7 @@ export class InMemoryCheckInRepository implements ICheckInRepository {
 
 	async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
 		const checkIn = {
-			id: randomUUID(),
+			id: data.id ?? randomUUID(),
 			user_id: data.user_id,
 			gym_id: data.gym_id,
 			validated_at: data.validated_at ? new Date(data.validated_at) : null,
