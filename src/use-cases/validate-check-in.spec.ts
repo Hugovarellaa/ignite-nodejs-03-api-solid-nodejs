@@ -1,5 +1,6 @@
 import { InMemoryCheckInRepository } from '@/repositories/in-memory/in-memory-check-in-repository'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { LateCheckInValidationError } from './errors/late-check-in-validation-error'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { ValidateCheckInUseCase } from './validate-check-in'
 
@@ -11,11 +12,11 @@ describe('Validate Check In User Case', () => {
 		inMemoryCheckInRepository = new InMemoryCheckInRepository()
 		sut = new ValidateCheckInUseCase(inMemoryCheckInRepository)
 
-		// vi.useFakeTimers()
+		vi.useFakeTimers()
 	})
 
 	afterEach(() => {
-		// vi.useRealTimers()
+		vi.useRealTimers()
 	})
 
 	it('should be able to validate the check-in', async () => {
@@ -40,5 +41,23 @@ describe('Validate Check In User Case', () => {
 				checkInId: 'inexistent-check-in-id',
 			})
 		}).rejects.toBeInstanceOf(ResourceNotFoundError)
+	})
+
+	it('should not be able to validate the check-in after 20 minutes of its creation', async () => {
+		vi.setSystemTime(new Date(2023, 2, 20, 13, 40)) // Colocar a Data atual para o test passa
+
+		const createdCheckIn = await inMemoryCheckInRepository.create({
+			gym_id: 'gym-01',
+			user_id: 'user-01',
+		})
+
+		const twentyOneMinutesInMs = 1000 * 60 * 21
+		vi.advanceTimersByTime(twentyOneMinutesInMs) // Avança 20 min da hora do setSystemTime
+
+		expect(async () => {
+			await sut.execute({
+				checkInId: createdCheckIn.id,
+			})
+		}).rejects.toBeInstanceOf(LateCheckInValidationError)
 	})
 })
