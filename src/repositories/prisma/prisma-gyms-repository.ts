@@ -21,7 +21,12 @@ export class PrismaGymsRepository implements IGymsRepository {
 	}
 
 	async searchMany(query: string, page: number): Promise<Gym[]> {
-		throw new Error('Method not implemented.')
+		const gym = await prisma.gym.findMany({
+			where: {
+				title: query,
+			},
+		})
+		return gym
 	}
 
 	async findManyNearBy(params: IFindManyNearByParams): Promise<Gym[]> {
