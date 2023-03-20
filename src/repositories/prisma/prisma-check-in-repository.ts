@@ -4,7 +4,11 @@ import { ICheckInRepository } from '../check-in-repository'
 
 export class PrismaCheckInsRepository implements ICheckInRepository {
 	async create(data: Prisma.CheckInUncheckedCreateInput): Promise<CheckIn> {
-		throw new Error('Method not implemented.')
+		const checkIn = await prisma.checkIn.create({
+			data,
+		})
+
+		return checkIn
 	}
 
 	async findByUserIdOnDate(
