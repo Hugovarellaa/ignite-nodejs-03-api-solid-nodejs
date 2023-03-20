@@ -12,7 +12,7 @@
 - [x] Deve ser possível se o usuário obter academias próximas (até 10km).
 - [x] Deve ser possível se o usuário buscar academias pelo nome.
 - [x] Deve ser possível se o usuário realizar check-ins em uma academia.
-- [ ] Deve ser possível validar o check-ins de um usuário.
+- [x] Deve ser possível validar o check-ins de um usuário.
 - [x] Deve ser possível cadastrar uma academia.
 
 ## RNs (Regras de negócio)
