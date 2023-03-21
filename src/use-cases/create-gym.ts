@@ -2,7 +2,7 @@ import { IGymsRepository } from '@/repositories/gyms-repository'
 import { Gym } from '@prisma/client'
 
 interface IRequest {
-	id: string
+	id?: string
 	title: string
 	description: string | null
 	phone: string | null
