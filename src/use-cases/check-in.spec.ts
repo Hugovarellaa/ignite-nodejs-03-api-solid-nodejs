@@ -47,7 +47,7 @@ describe('Check In User Case', () => {
 	})
 
 	it('should not be able to check in twice in the same day', async () => {
-		vi.setSystemTime(new Date(2023, 2, 20, 8, 0, 0)) // Colocar data exata do dia executado (Ano , Mes , Dia , Horas, minutos , Segundos) Mes Começar em 0 na forma de Array
+		vi.setSystemTime(new Date(2023, 2, 21, 8, 0, 0)) // Colocar data exata do dia executado (Ano , Mes , Dia , Horas, minutos , Segundos) Mes Começar em 0 na forma de Array
 
 		expect(async () => {
 			await sut.execute({
