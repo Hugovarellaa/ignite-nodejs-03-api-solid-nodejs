@@ -13,7 +13,7 @@ export async function profile(request: FastifyRequest, reply: FastifyReply) {
 		password_hash: undefined,
 	}
 
-	return reply.status(201).send({
+	return reply.status(200).send({
 		user: userReturn,
 	})
 }
