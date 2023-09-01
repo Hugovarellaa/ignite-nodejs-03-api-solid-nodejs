@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  database:
+    image: bitnami/postgresql
+    container_name: api-solid-pg
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=api-solid-pg
+    volumes:
+      - pgdata:/data/postgres
+
+  app:
+    build: .
+    container_name: api-solid-nodejs
+    restart: always
+    ports:
+      - 3333:3333
+      - 9229:9229
+    volumes:
+      - .:/usr/app
+    links:
+      - database
+    depends_on:
+      - database
+
+volumes:
+  pgdata:
+    driver: local

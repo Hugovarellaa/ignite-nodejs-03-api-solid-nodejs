@@ -1,4 +1,4 @@
-# App 82
+# App
 
 ## Gympass style app.
 
