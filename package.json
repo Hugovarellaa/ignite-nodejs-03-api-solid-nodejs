@@ -1,23 +1,28 @@
 {
-  "name": "ignite-nodejs-03-api-solid-nodejs",
-  "version": "1.0.0",
-  "description": "## Gympass style app.",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
-    "start:dev": "tsx watch ./src/server.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "fastify": "4.22.1"
-  },
-  "devDependencies": {
-    "@types/node": "20.5.7",
-    "tsup": "7.2.0",
-    "tsx": "3.12.7",
-    "typescript": "5.2.2"
-  }
+	"name": "ignite-nodejs-03-api-solid-nodejs",
+	"version": "1.0.0",
+	"description": "## Gympass style app.",
+	"main": "index.js",
+	"scripts": {
+		"build": "tsup src --out-dir build",
+		"start": "node build/server.js",
+		"start:dev": "tsx watch ./src/server.ts",
+		"lint": "eslint src --ext .ts --fix"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"fastify": "4.22.1",
+		"zod": "3.22.2"
+	},
+	"devDependencies": {
+		"@rocketseat/eslint-config": "2.1.0",
+		"@types/node": "20.5.7",
+		"dotenv": "16.3.1",
+		"eslint": "8.48.0",
+		"tsup": "7.2.0",
+		"tsx": "3.12.7",
+		"typescript": "5.2.2"
+	}
 }
